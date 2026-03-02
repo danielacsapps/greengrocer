@@ -13,6 +13,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.green,
+          foregroundColor: Colors.white,
+        ),
         primarySwatch: Colors.green,
         scaffoldBackgroundColor: Colors.white.withAlpha(190),
         elevatedButtonTheme: ElevatedButtonThemeData(
