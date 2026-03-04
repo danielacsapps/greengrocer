@@ -4,7 +4,7 @@ import 'package:greengrocer/src/models/cart_item_model.dart';
 import 'package:greengrocer/src/pages/cart/components/cart_tile.dart';
 import 'package:greengrocer/src/pages/common_widgets/payment_dialog.dart';
 import 'package:greengrocer/src/services/utils_services.dart';
-import 'package:greengrocer/src/config/app_data.dart' as appData;
+import 'package:greengrocer/src/config/app_data.dart' as app_data;
 
 class CartTab extends StatefulWidget {
   const CartTab({super.key});
@@ -14,17 +14,20 @@ class CartTab extends StatefulWidget {
 }
 
 class _CartTabState extends State<CartTab> {
-  final UtilsServices utilServices = UtilsServices();
+  final UtilsServices utilsServices = UtilsServices();
 
   void removerItemFromCart(CartItemModel cartItem) {
     setState(() {
-      appData.cartItems.remove(cartItem);
+      app_data.cartItems.remove(cartItem);
+      utilsServices.showToast(
+        message: '${cartItem.item.itemName} removido(a) do carrinho',
+      );
     });
   }
 
   double cartTotalPrince() {
     double total = 0;
-    for (var item in appData.cartItems) {
+    for (var item in app_data.cartItems) {
       total += item.totalPrice();
     }
     return total;
@@ -38,15 +41,15 @@ class _CartTabState extends State<CartTab> {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: appData.cartItems.length,
+              itemCount: app_data.cartItems.length,
               itemBuilder: (_, index) {
                 return CartTile(
-                  cartItem: appData.cartItems[index],
+                  cartItem: app_data.cartItems[index],
                   updateQuantity: (qtd) {
                     if (qtd == 0) {
-                      removerItemFromCart(appData.cartItems[index]);
+                      removerItemFromCart(app_data.cartItems[index]);
                     } else {
-                      setState(() => appData.cartItems[index].quantity = qtd);
+                      setState(() => app_data.cartItems[index].quantity = qtd);
                     }
                   },
                 );
@@ -76,7 +79,7 @@ class _CartTabState extends State<CartTab> {
                 const Text('Total geral', style: TextStyle(fontSize: 12)),
 
                 Text(
-                  utilServices.priceToCurrency(cartTotalPrince()),
+                  utilsServices.priceToCurrency(cartTotalPrince()),
                   style: TextStyle(
                     fontSize: 23,
                     color: CustomColors.customSwatchColor,
@@ -100,8 +103,13 @@ class _CartTabState extends State<CartTab> {
                         showDialog(
                           context: context,
                           builder: (_) {
-                            return PaymentDialog(order: appData.orders.first);
+                            return PaymentDialog(order: app_data.orders.first);
                           },
+                        );
+                      } else {
+                        utilsServices.showToast(
+                          message: 'Pedido não confirmado',
+                          isError: true,
                         );
                       }
                     },

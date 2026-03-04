@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:greengrocer/src/pages/common_widgets/custom_text_field.dart';
-import 'package:greengrocer/src/config/app_data.dart' as appData;
+import 'package:greengrocer/src/config/app_data.dart' as app_data;
 
 class ProfileTab extends StatefulWidget {
   const ProfileTab({super.key});
@@ -25,26 +25,26 @@ class _ProfileTabState extends State<ProfileTab> {
           CustomTextField(
             icon: Icons.email,
             label: 'E-mail',
-            initialValue: appData.user.email,
+            initialValue: app_data.user.email,
             readOnly: true,
           ),
           CustomTextField(
             icon: Icons.person,
             label: 'Nome',
-            initialValue: appData.user.name,
+            initialValue: app_data.user.name,
             readOnly: true,
           ),
           CustomTextField(
             icon: Icons.phone,
             label: 'Celular',
-            initialValue: appData.user.phone,
+            initialValue: app_data.user.phone,
             readOnly: true,
           ),
           CustomTextField(
             icon: Icons.file_copy,
             label: 'CPF',
             isSecret: true,
-            initialValue: appData.user.cpf,
+            initialValue: app_data.user.cpf,
             readOnly: true,
           ),
           SizedBox(
