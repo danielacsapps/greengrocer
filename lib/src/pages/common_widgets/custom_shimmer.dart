@@ -10,6 +10,7 @@ class CustomShimmer extends StatelessWidget {
   final BorderRadius? borderRadius;
 
   const CustomShimmer({
+    super.key,
     required this.height,
     required this.width,
     this.baseColor,
