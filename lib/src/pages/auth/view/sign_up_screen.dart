@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/get_instance.dart';
 import 'package:greengrocer/src/pages/auth/controller/auth_controller.dart';
 
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
